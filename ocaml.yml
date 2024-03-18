@@ -1,0 +1,25 @@
+name: OCaml Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up OCaml
+        uses: ocaml/setup-ocaml@v2
+        with:
+          ocaml-version: 4.12
+
+      - name: Compile OCaml code
+        run: ocamlc -o theorem_prover theorem_prover.ml
+
+      - name: Run OCaml code
+        run: ./theorem_prover
